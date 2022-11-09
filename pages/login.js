@@ -7,7 +7,7 @@ export default function Login() {
         <div className="container mx-auto px-4">
           <div className="max-w-xl mx-auto">
             <div className="mb-10 text-center ">
-              <Link href="/">
+              <Link href="/" legacyBehavior>
                 <a className="text-white text-3xl font-bold leading-none">MakersMatch</a>
               </Link>
             </div>

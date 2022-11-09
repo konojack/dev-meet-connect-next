@@ -31,7 +31,7 @@ const Navigation = () => {
             </a>
           </li>
         </ul>
-        <Link href="/login">
+        <Link href="/login" legacyBehavior>
           <a className="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-l-xl rounded-t-xl transition duration-200">
             Sign in
           </a>
@@ -72,13 +72,11 @@ const Navigation = () => {
           </div>
           <div className="mt-auto">
             <div className="pt-6">
-              <Link href="/login">
-                <a
-                  className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-l-xl rounded-t-xl">
+              <Link href="/login" legacyBehavior>
+                <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-l-xl rounded-t-xl">
                   Sign In
                 </a>
               </Link>
-
             </div>
             <p className="my-4 text-xs text-center text-gray-400">
               <span>&copy; 2020 All rights reserved.</span>
