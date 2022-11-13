@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import classNames from 'classnames';
+import { useSession } from 'next-auth/react';
 
 const Navigation = () => {
   const [isNavOpen, setNavOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   return (
     <section className="container mx-auto">
@@ -17,7 +19,7 @@ const Navigation = () => {
             className="navbar-burger flex items-center text-green-600 p-3">
             <svg
               className="block h-4 w-4 fill-current"
-              viewbox="0 0 20 20"
+              viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg">
               <title>Mobile menu</title>
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
@@ -31,11 +33,20 @@ const Navigation = () => {
             </a>
           </li>
         </ul>
-        <Link href="/login" legacyBehavior>
-          <a className="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-l-xl rounded-t-xl transition duration-200">
-            Sign in
-          </a>
-        </Link>
+        {!session && status !== 'loading' && (
+          <Link href="/login" legacyBehavior>
+            <a className="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-l-xl rounded-t-xl transition duration-200">
+              Sign In
+            </a>
+          </Link>
+        )}
+        {session && status !== 'loading' && (
+          <Link href="/" legacyBehavior>
+            <a className="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-l-xl rounded-t-xl transition duration-200">
+              {session.user.email}
+            </a>
+          </Link>
+        )}
       </nav>
       <div className={classNames(['navbar-menu', 'relative', 'z-50'], { hidden: !isNavOpen })}>
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -49,7 +60,7 @@ const Navigation = () => {
                 className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewbox="0 0 24 24"
+                viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path
                   strokeLinecap="round"
@@ -72,11 +83,20 @@ const Navigation = () => {
           </div>
           <div className="mt-auto">
             <div className="pt-6">
-              <Link href="/login" legacyBehavior>
-                <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-l-xl rounded-t-xl">
-                  Sign In
-                </a>
-              </Link>
+              {!session && status !== 'loading' && (
+                <Link href="/login" legacyBehavior>
+                  <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-l-xl rounded-t-xl">
+                    Sign In
+                  </a>
+                </Link>
+              )}
+              {session && status !== 'loading' && (
+                <Link href="/" legacyBehavior>
+                  <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-l-xl rounded-t-xl">
+                    {session.user.email}
+                  </a>
+                </Link>
+              )}
             </div>
             <p className="my-4 text-xs text-center text-gray-400">
               <span>&copy; 2020 All rights reserved.</span>
@@ -94,16 +114,16 @@ const Footer = () => {
       <div className="skew skew-top mr-for-radius">
         <svg
           className="h-8 md:h-12 lg:h-20 w-full text-gray-50"
-          viewbox="0 0 10 10"
-          preserveaspectratio="none">
+          viewBox="0 0 10 10"
+          preserveAspectRatio="none">
           <polygon fill="currentColor" points="0 0 10 10 0 10"></polygon>
         </svg>
       </div>
       <div className="skew skew-top ml-for-radius">
         <svg
           className="h-8 md:h-12 lg:h-20 w-full text-gray-50"
-          viewbox="0 0 10 10"
-          preserveaspectratio="none">
+          viewBox="0 0 10 10"
+          preserveAspectRatio="none">
           <polygon fill="currentColor" points="0 10 10 0 10 10"></polygon>
         </svg>
       </div>
@@ -117,16 +137,16 @@ const Footer = () => {
       <div className="skew skew-bottom mr-for-radius">
         <svg
           className="h-8 md:h-12 lg:h-20 w-full text-gray-50"
-          viewbox="0 0 10 10"
-          preserveaspectratio="none">
+          viewBox="0 0 10 10"
+          preserveAspectRatio="none">
           <polygon fill="currentColor" points="0 0 10 0 0 10"></polygon>
         </svg>
       </div>
       <div className="skew skew-bottom ml-for-radius">
         <svg
           className="h-8 md:h-12 lg:h-20 w-full text-gray-50"
-          viewbox="0 0 10 10"
-          preserveaspectratio="none">
+          viewBox="0 0 10 10"
+          preserveAspectRatio="none">
           <polygon fill="currentColor" points="0 0 10 0 10 10"></polygon>
         </svg>
       </div>
