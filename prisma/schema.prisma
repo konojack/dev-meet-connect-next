@@ -81,11 +81,11 @@ model ProfileCheck {
 }
 
 model Conversation {
-  id                  Int                   @id @default(autoincrement())
-  createdAt           DateTime              @default(now()) @map("created_at")
-  updatedAt           DateTime              @default(now()) @map("updated_at")
-  ConversationUser    ConversationUser[]
-  ConversationMessage ConversationMessage[]
+  id        Int                   @id @default(autoincrement())
+  createdAt DateTime              @default(now()) @map("created_at")
+  updatedAt DateTime              @default(now()) @map("updated_at")
+  users     ConversationUser[]
+  messages  ConversationMessage[]
 }
 
 model ConversationUser {
