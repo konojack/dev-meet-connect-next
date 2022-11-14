@@ -106,6 +106,11 @@
   "resolved" "https://registry.npmjs.org/@prisma/engines-version/-/engines-version-4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32.tgz"
   "version" "4.6.1-3.694eea289a8462c80264df36757e4fdc129b1b32"
 
+"@prisma/prisma-fmt-wasm@4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6":
+  "integrity" "sha512-Hc2i5nfAt3nLDUkQNWJcKFJaA9Avd5zz6t85w9SW7P0vGtFXScQ+xIu6znbULr9bc0pgTWejY1We2u/7EMxHWw=="
+  "resolved" "https://registry.npmjs.org/@prisma/prisma-fmt-wasm/-/prisma-fmt-wasm-4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6.tgz"
+  "version" "4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6"
+
 "@swc/helpers@0.4.11":
   "integrity" "sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw=="
   "resolved" "https://registry.npmjs.org/@swc/helpers/-/helpers-0.4.11.tgz"
@@ -1436,7 +1441,14 @@
   dependencies:
     "fast-diff" "^1.1.2"
 
-"prettier@^2.7.1", "prettier@>=1.13.0":
+"prettier-plugin-prisma@^4.4.0":
+  "integrity" "sha512-631zwtvHUjcuS+i83wkxE3LqizazojWie4Pkha9GL6r1UsochNUedvxfvWPCdw6Dpyawvc5UKkmxcb9aT9+xfg=="
+  "resolved" "https://registry.npmjs.org/prettier-plugin-prisma/-/prettier-plugin-prisma-4.4.0.tgz"
+  "version" "4.4.0"
+  dependencies:
+    "@prisma/prisma-fmt-wasm" "4.4.0-66.f352a33b70356f46311da8b00d83386dd9f145d6"
+
+"prettier@^2.7.1", "prettier@>=1.13.0", "prettier@>=2":
   "integrity" "sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g=="
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.7.1.tgz"
   "version" "2.7.1"

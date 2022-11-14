@@ -6,23 +6,24 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -38,13 +39,74 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id                  String                @id @default(cuid())
+  name                String?
+  email               String?               @unique
+  emailVerified       DateTime?
+  image               String?
+  skill               String?
+  biogram             String?
+  timezone            String?
+  createdAt           DateTime              @default(now()) @map("created_at")
+  updatedAt           DateTime              @default(now()) @map("updated_at")
+  accounts            Account[]
+  sessions            Session[]
+  filter              Filter?
+  profilesChecked     ProfileCheck[]        @relation("ProfilesChecked")
+  targetChecks        ProfileCheck[]        @relation("TargetProfiles")
+  ConversationUser    ConversationUser[]
+  ConversationMessage ConversationMessage[]
+}
+
+model Filter {
+  id       Int     @id @default(autoincrement())
+  skill    String?
+  timezone String?
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+}
+
+model ProfileCheck {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation("ProfilesChecked", fields: [userId], references: [id])
+  userId     String   @map("user_id")
+  targetUser User     @relation("TargetProfiles", fields: [targetId], references: [id])
+  targetId   String   @map("target_id")
+  liked      Boolean  @default(false)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @map("updated_at")
+}
+
+model Conversation {
+  id                  Int                   @id @default(autoincrement())
+  createdAt           DateTime              @default(now()) @map("created_at")
+  updatedAt           DateTime              @default(now()) @map("updated_at")
+  ConversationUser    ConversationUser[]
+  ConversationMessage ConversationMessage[]
+}
+
+model ConversationUser {
+  id             Int          @id @default(autoincrement())
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId Int          @map("conversation_id")
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @default(now()) @map("updated_at")
+}
+
+model ConversationMessage {
+  id             Int          @id @default(autoincrement())
+  content        String
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId Int          @map("conversation_id")
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String       @map("user_id")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @default(now()) @map("updated_at")
 }
 
 model VerificationToken {
