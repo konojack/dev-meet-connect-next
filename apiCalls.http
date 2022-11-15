@@ -1,9 +1,46 @@
 @sessionToken = next-auth.session-token=780b37f4-eda2-4ce9-a2f6-ca81d3a34950;
+###
+http://localhost:3000/api/hello
+Cookie: {{sessionToken}}
+
+###
 PUT http://localhost:3000/api/user/filter
 Cookie: {{sessionToken}}
-Content-type: application/json
+Content-Type: application/json
 
 {
   "skill": "Tester",
   "timezone": "GMT+2:00"
+}
+
+###
+PUT http://localhost:3000/api/user/profile
+Cookie: {{sessionToken}}
+Content-Type: application/json
+
+{
+  "skill": "Fullstack Developer",
+  "timezone": "GMT+2:00"
+}
+
+###
+GET http://localhost:3000/api/profiles
+Cookie: {{sessionToken}}
+
+###
+POST http://localhost:3000/api/profiles
+Content-Type: application/json
+Cookie: {{sessionToken}}
+
+{
+  "targetUserId": 17
+}
+
+###
+DELETE  http://localhost:3000/api/profiles
+Content-Type: application/json
+Cookie: {{sessionToken}}
+
+{
+  "targetUserId": 25
 }
