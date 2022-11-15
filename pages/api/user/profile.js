@@ -1,4 +1,4 @@
-import onlyAuth from 'middlewares/onlyAuth';
+import { onlyAuth } from 'middlewares/onlyAuth';
 import { updateProfile } from 'services/profiles/update';
 
 const userProfileApi = async (req, res) => {
@@ -10,7 +10,7 @@ const userProfileApi = async (req, res) => {
 
         res.status(200).json({ user });
       } catch (error) {
-        console.log(`error`, error)
+        console.log(`error`, error);
         res.status(422).json({ user: null, error });
       }
       break;

@@ -1,4 +1,4 @@
-import onlyAuth from 'middlewares/onlyAuth';
+import { onlyAuth } from 'middlewares/onlyAuth';
 import { findMatch } from 'services/profiles/findMatch';
 import { likeProfile } from 'services/profiles/likeProfile';
 import { skipProfile } from 'services/profiles/skipProfile';
@@ -12,7 +12,7 @@ const profilesApi = async (req, res) => {
 
         res.status(200).json({ profile });
       } catch (error) {
-        console.log(`error`, error)
+        console.log(`error`, error);
         res.status(422).json({ profile: null, error });
       }
       break;
@@ -23,7 +23,7 @@ const profilesApi = async (req, res) => {
         const { targetUserId } = req.body;
         const { hasMatch, targetUser } = await likeProfile({
           userId,
-          targetUserId: Number(targetUserId)
+          targetUserId: targetUserId
         });
 
         res.status(200).json({ hasMatch, targetUser });
@@ -39,7 +39,7 @@ const profilesApi = async (req, res) => {
         const { targetUserId } = req.body;
         const { targetUser } = await skipProfile({
           userId,
-          targetUserId: Number(targetUserId)
+          targetUserId: targetUserId
         });
 
         res.status(200).json({ targetUser });
