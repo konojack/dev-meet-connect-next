@@ -1,0 +1,9 @@
+@sessionToken = next-auth.session-token=780b37f4-eda2-4ce9-a2f6-ca81d3a34950;
+PUT http://localhost:3000/api/user/filter
+Cookie: {{sessionToken}}
+Content-type: application/json
+
+{
+  "skill": "Tester",
+  "timezone": "GMT+2:00"
+}
