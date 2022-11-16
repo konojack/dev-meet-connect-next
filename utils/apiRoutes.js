@@ -9,7 +9,7 @@ const httpClient = axios.create({
 export const apiRoutes = {
   profiles: {
     like: (payload) => httpClient.post('/api/profiles', payload),
-    skip: (payload) => httpClient.delete('/api/profiles', payload)
+    skip: (payload) => httpClient({ url: '/api/profiles', data: payload, method: 'DELETE' })
   },
   user: {
     filter: {
