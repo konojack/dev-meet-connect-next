@@ -1,7 +1,8 @@
 import { conversation } from 'models';
 
-export const get = ({ id, userId }) =>
-  conversation.findFirst({
+export const get = ({ id, userId }) => {
+  console.log(id, userId);
+  return conversation.findFirst({
     where: {
       id,
       users: {
@@ -23,3 +24,4 @@ export const get = ({ id, userId }) =>
       }
     }
   });
+};

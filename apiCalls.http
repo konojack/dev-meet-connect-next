@@ -1,4 +1,4 @@
-@sessionToken = next-auth.session-token=780b37f4-eda2-4ce9-a2f6-ca81d3a34950
+@sessionToken = next-auth.session-token=b642caaa-ac3e-45ec-aeb5-477838512194
 ###
 http://localhost:3000/api/hello
 Cookie: {{sessionToken}}
@@ -51,6 +51,6 @@ Content-Type: application/json
 Cookie: {{sessionToken}}
 
 ###
-GET http://localhost:3000/api/conversations/22
+GET http://localhost:3000/api/conversations/1
 Content-Type: application/json
 Cookie: {{sessionToken}}

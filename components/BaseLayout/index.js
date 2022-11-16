@@ -34,6 +34,9 @@ const Navigation = () => {
             <Link href="/profiles/browse" legacyBehavior>
               <a className="text-sm text-gray-400 hover:text-gray-500 ml-12">Browse</a>
             </Link>
+            <Link href="/connections" legacyBehavior>
+              <a className="text-sm text-gray-400 hover:text-gray-500 ml-12">Connections</a>
+            </Link>
           </li>
         </ul>
         {!session && status !== 'loading' && (
@@ -80,6 +83,18 @@ const Navigation = () => {
                   className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
                   href="/">
                   Start
+                </a>
+              </li>
+              <li className="mb-1">
+                <a
+                  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                  href="/profiles/browse">
+                  Browse
+                </a>
+                <a
+                  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                  href="/connections">
+                  Connections
                 </a>
               </li>
             </ul>

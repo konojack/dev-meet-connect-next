@@ -7,8 +7,9 @@ const conversationApi = async (req, res) => {
   switch (req.method) {
     case 'POST': {
       try {
+        const parsedReqBody = JSON.parse(req.body);
         const conversation = await create({
-          ...req.body,
+          ...parsedReqBody,
           userId: req.currentUser.id,
           conversationId: Number(req.query.id)
         });

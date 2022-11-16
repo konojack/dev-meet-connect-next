@@ -57,7 +57,6 @@ export default function ProfilePage({ profile, skills, timezones }) {
       const {
         data: { user }
       } = await apiRoutes.user.profile.get();
-      console.log('HEHE', user);
       setCurrentUser(user);
     };
 

@@ -1,6 +1,7 @@
 import { conversation as conversationModel, conversationMessage } from 'models';
 
 export const create = async ({ userId, conversationId, content }) => {
+  console.log(userId, conversationId, content);
   const conversation = await conversationModel.findFirst({
     where: {
       id: conversationId,
