@@ -2,6 +2,21 @@ import Link from 'next/link';
 import { useState } from 'react';
 import classNames from 'classnames';
 import { useSession } from 'next-auth/react';
+import useSWR from 'swr';
+import { apiRoutes } from 'utils/apiRoutes';
+
+const ConnectionsLink = () => {
+  const { data, loading } = useSWR(`/api/conversations/`, apiRoutes.fetcher);
+
+  return (
+    <Link href="/connections" legacyBehavior>
+      <a className="text-sm text-gray-400 hover:text-gray-500">
+        Connections
+        {!loading && data?.unread > 0 && ` (${data.unread})`}
+      </a>
+    </Link>
+  );
+};
 
 const Navigation = () => {
   const [isNavOpen, setNavOpen] = useState(false);
@@ -31,12 +46,14 @@ const Navigation = () => {
             <Link href="/" legacyBehavior>
               <a className="text-sm text-gray-400 hover:text-gray-500 mr-12">Start</a>
             </Link>
+          </li>
+          <li>
             <Link href="/profiles/browse" legacyBehavior>
               <a className="text-sm text-gray-400 hover:text-gray-500 ml-12">Browse</a>
             </Link>
-            <Link href="/connections" legacyBehavior>
-              <a className="text-sm text-gray-400 hover:text-gray-500 ml-12">Connections</a>
-            </Link>
+          </li>
+          <li>
+            <ConnectionsLink />
           </li>
         </ul>
         {!session && status !== 'loading' && (
@@ -91,11 +108,7 @@ const Navigation = () => {
                   href="/profiles/browse">
                   Browse
                 </a>
-                <a
-                  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
-                  href="/connections">
-                  Connections
-                </a>
+                <ConnectionsLink />
               </li>
             </ul>
           </div>
