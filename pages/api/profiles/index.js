@@ -20,7 +20,9 @@ const profilesApi = async (req, res) => {
 
     case 'POST': {
       try {
-        const { targetUserId } = req.body;
+        const parsedRequestBody = JSON.parse(req.body);
+        console.log('BODY', parsedRequestBody);
+        const { targetUserId } = parsedRequestBody;
         const { hasMatch, targetUser } = await likeProfile({
           userId,
           targetUserId: targetUserId

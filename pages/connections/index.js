@@ -46,10 +46,10 @@ export default function Connections({ conversations }) {
                 </div>
                 <div className="w-full">
                   <div className="text-lg font-semibold">
-                    {item.messages[item.messages.length - 1].user.name}
+                    {item?.messages[item.messages.length - 1]?.user.name}
                   </div>
                   <span className="text-gray-500">
-                    {item.messages[item.messages.length - 1].content}
+                    {item?.messages[item.messages.length - 1]?.content}
                   </span>
                 </div>
               </div>
