@@ -1,18 +1,19 @@
 import { filter } from 'models';
 
-export const upsertFilter = ({ userId, payload }) =>
-  filter.upsert({
+export const upsertFilter = ({ userId, payload }) => {
+  const parsedPayload = JSON.parse(payload);
+  return filter.upsert({
     where: {
       userId
     },
     update: {
-      skill: payload.skill,
-      timezone: payload.timezone,
+      skill: parsedPayload.skill,
+      timezone: parsedPayload.timezone,
       updatedAt: new Date()
     },
     create: {
-      skill: payload.skill,
-      timezone: payload.timezone,
+      skill: parsedPayload.skill,
+      timezone: parsedPayload.timezone,
       user: {
         connect: {
           id: userId
@@ -20,3 +21,4 @@ export const upsertFilter = ({ userId, payload }) =>
       }
     }
   });
+};

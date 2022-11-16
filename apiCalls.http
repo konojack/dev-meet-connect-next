@@ -1,4 +1,4 @@
-@sessionToken = next-auth.session-token=780b37f4-eda2-4ce9-a2f6-ca81d3a34950;
+@sessionToken = next-auth.session-token=780b37f4-eda2-4ce9-a2f6-ca81d3a34950
 ###
 http://localhost:3000/api/hello
 Cookie: {{sessionToken}}
@@ -9,8 +9,7 @@ Cookie: {{sessionToken}}
 Content-Type: application/json
 
 {
-  "skill": "Tester",
-  "timezone": "GMT+2:00"
+  "skill": "UI Design"
 }
 
 ###
