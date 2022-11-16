@@ -4,8 +4,10 @@ import { user } from 'models';
 import Link from 'next/link';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
+import { totalCount } from 'services/conversations/totalCount';
+import Pagination from 'components/Pagination';
 
-export const getServerSideProps = async ({ req, res }) => {
+export const getServerSideProps = async ({ req, res, query }) => {
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {
@@ -20,13 +22,17 @@ export const getServerSideProps = async ({ req, res }) => {
     }
   });
 
-  const conversations = await getAll({ userId: currentUser.id });
+  const perPage = 7;
+  const count = await totalCount({ userId: currentUser.id });
+  const pagesCount = Math.ceil(count / perPage);
+  const page = Number(query.page || 1);
+  const conversations = await getAll({ userId: currentUser.id, perPage, page: page - 1 });
   return {
-    props: { conversations }
+    props: { conversations, pagesCount, page }
   };
 };
 
-export default function Connections({ conversations }) {
+export default function Connections({ conversations, pagesCount, page }) {
   return (
     <BaseLayout>
       <div className="border-t-2">
@@ -57,6 +63,7 @@ export default function Connections({ conversations }) {
           );
         })}
       </div>
+      <Pagination currentPage={page} href="/connections" pagesCount={pagesCount} />
     </BaseLayout>
   );
 }
