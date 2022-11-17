@@ -44,17 +44,24 @@ const Navigation = () => {
         <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
           <li>
             <Link href="/" legacyBehavior>
-              <a className="text-sm text-gray-400 hover:text-gray-500 mr-12">Start</a>
+              <a className="text-sm text-gray-400 hover:text-gray-500">Start</a>
             </Link>
           </li>
           <li>
             <Link href="/profiles/browse" legacyBehavior>
-              <a className="text-sm text-gray-400 hover:text-gray-500 ml-12">Browse</a>
+              <a className="text-sm text-gray-400 hover:text-gray-500">Browse</a>
             </Link>
           </li>
           <li>
             <ConnectionsLink />
           </li>
+          {session && status !== 'loading' && (
+            <li>
+              <Link href="/my-profile" legacyBehavior>
+                <a className="text-sm text-gray-400 hover:text-gray-500">My Profile</a>
+              </Link>
+            </li>
+          )}
         </ul>
         {!session && status !== 'loading' && (
           <Link href="/login" legacyBehavior>

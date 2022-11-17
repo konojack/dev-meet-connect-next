@@ -19,7 +19,7 @@ const userProfileApi = async (req, res) => {
     }
     case 'PUT': {
       try {
-        const payload = req.body;
+        const payload = JSON.parse(req.body);
         const user = await updateProfile({ userId: req.currentUser.id, payload });
 
         res.status(200).json({ user });
