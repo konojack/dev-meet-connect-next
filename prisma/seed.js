@@ -140,9 +140,9 @@ const createConversations = async (mainUserId) => {
 };
 
 async function main() {
-  // await createUsers();
-  // await createSkills();
-  // await createTimezones();
+  await createUsers();
+  await createSkills();
+  await createTimezones();
   await createConversations('clak3ap6h0000vo2c91102zg4');
 }
 
