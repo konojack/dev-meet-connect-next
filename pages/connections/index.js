@@ -14,7 +14,10 @@ export const getServerSideProps = async ({ req, res, query }) => {
 
   if (!session) {
     return {
-      notFound: true
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
     };
   }
 
