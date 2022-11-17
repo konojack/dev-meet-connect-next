@@ -9,9 +9,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "prisma:generate": "prisma generate",
-    "seedDatabase": "prisma db seed"
+    "vercel-build": "npx prisma generate && npx prisma migrate deploy && next build",
+    "prisma:generate": "npx prisma generate",
+    "seedDatabase": "npx prisma db seed"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
