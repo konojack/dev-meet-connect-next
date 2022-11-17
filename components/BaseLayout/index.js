@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import classNames from 'classnames';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import useSWR from 'swr';
 import { apiRoutes } from 'utils/apiRoutes';
 
@@ -60,6 +60,17 @@ const Navigation = () => {
               <Link href="/my-profile" legacyBehavior>
                 <a className="text-sm text-gray-400 hover:text-gray-500">My Profile</a>
               </Link>
+            </li>
+          )}
+          {session && status !== 'loading' && (
+            <li>
+              <button
+                onClick={() => {
+                  signOut({ callbackUrl: '/' });
+                }}
+                className="text-sm text-gray-400 hover:text-gray-500">
+                Logout
+              </button>
             </li>
           )}
         </ul>
