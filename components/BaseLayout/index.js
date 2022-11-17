@@ -5,8 +5,8 @@ import { signOut, useSession } from 'next-auth/react';
 import useSWR from 'swr';
 import { apiRoutes } from 'utils/apiRoutes';
 
-const ConnectionsLink = ({ className }) => {
-  const { data, loading } = useSWR(`/api/conversations/`, apiRoutes.fetcher);
+const ConnectionsLink = ({ isLoggedIn, className }) => {
+  const { data, loading } = useSWR(isLoggedIn ? `/api/conversations/` : null, apiRoutes.fetcher);
 
   return (
     <Link href="/connections" legacyBehavior>
@@ -53,7 +53,10 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
-            <ConnectionsLink className="text-sm text-gray-400 hover:text-gray-500" />
+            <ConnectionsLink
+              isLoggedIn={session && status !== 'loading'}
+              className="text-sm text-gray-400 hover:text-gray-500"
+            />
           </li>
           {session && status !== 'loading' && (
             <li>
@@ -128,7 +131,10 @@ const Navigation = () => {
                 </a>
               </li>
               <li className="mb-1">
-                <ConnectionsLink className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded" />
+                <ConnectionsLink
+                  isLoggedIn={session && status !== 'loading'}
+                  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                />
               </li>
               {session && status !== 'loading' && (
                 <li className="mb-1">
