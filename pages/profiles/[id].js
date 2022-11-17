@@ -95,6 +95,14 @@ export default function ProfilePage({ profile, skills, timezones }) {
     }
   };
 
+  if (!profile) {
+    return (
+      <BaseLayout>
+        <p>Loading...</p>
+      </BaseLayout>
+    );
+  }
+
   return (
     <BaseLayout>
       <Head>
