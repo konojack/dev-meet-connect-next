@@ -5,12 +5,12 @@ import { signOut, useSession } from 'next-auth/react';
 import useSWR from 'swr';
 import { apiRoutes } from 'utils/apiRoutes';
 
-const ConnectionsLink = () => {
+const ConnectionsLink = ({ className }) => {
   const { data, loading } = useSWR(`/api/conversations/`, apiRoutes.fetcher);
 
   return (
     <Link href="/connections" legacyBehavior>
-      <a className="text-sm text-gray-400 hover:text-gray-500">
+      <a className={className}>
         Connections
         {!loading && data?.unread > 0 && ` (${data.unread})`}
       </a>
@@ -53,7 +53,7 @@ const Navigation = () => {
             </Link>
           </li>
           <li>
-            <ConnectionsLink />
+            <ConnectionsLink className="text-sm text-gray-400 hover:text-gray-500" />
           </li>
           {session && status !== 'loading' && (
             <li>
@@ -126,8 +126,19 @@ const Navigation = () => {
                   href="/profiles/browse">
                   Browse
                 </a>
-                <ConnectionsLink />
               </li>
+              <li className="mb-1">
+                <ConnectionsLink className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded" />
+              </li>
+              {session && status !== 'loading' && (
+                <li className="mb-1">
+                  <a
+                    className="block p-4 text-sm font-semibold text-gray-400 hover:bg-green-50 hover:text-green-600 rounded"
+                    href="/my-profile">
+                    My Profile
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
           <div className="mt-auto">
@@ -140,11 +151,11 @@ const Navigation = () => {
                 </Link>
               )}
               {session && status !== 'loading' && (
-                <Link href="/" legacyBehavior>
-                  <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-green-600 hover:bg-green-700 rounded-l-xl rounded-t-xl">
-                    {session.user.email}
-                  </a>
-                </Link>
+                <button
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                  className="w-full block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-gray-600 hover:bg-gray-700 rounded-l-xl rounded-t-xl">
+                  Logout
+                </button>
               )}
             </div>
             <p className="my-4 text-xs text-center text-gray-400">
