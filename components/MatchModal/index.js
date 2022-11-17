@@ -18,7 +18,9 @@ const MatchModal = ({ handleClose, isOpen }) => {
           })}
           aria-hidden={isOpen ? 'false' : 'true'}></div>
 
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+          &#8203;
+        </span>
 
         <div
           className={classNames(
@@ -68,7 +70,8 @@ const MatchModal = ({ handleClose, isOpen }) => {
                 </h3>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    The profile you just visted liked you back. Start conversation with this person or keep browsing.
+                    The profile you just visted liked you back. Start conversation with this person
+                    or keep browsing.
                   </p>
                 </div>
               </div>
